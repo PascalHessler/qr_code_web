@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "qr-code-web"
+version = "0.1.0"
+description = ""
+authors = ["Pascal Heßler <pascal.hessler@wirtschaft.uni-giessen.de>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+streamlit = "^1.33.0"
+osmnx = "^1.9.3"
+segno = "^1.6.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
