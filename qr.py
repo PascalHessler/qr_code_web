@@ -8,10 +8,10 @@ import uuid
 
 st.write("""
 # Generate QR Codes
+No Data is saved on the server, all data is processed on the client side or in memory on the server (e.g. Logo).
 """)
 
 tab1, tab2, tab3, tab4 = st.tabs(["Address", "Lat long", "Link", "Link & Logo"])
-
 
 @st.cache_data(experimental_allow_widgets=True)
 def show_qr(_img, _buff):
@@ -275,3 +275,5 @@ with (tab4):
     except ValueError as e:
         st.error(str(e))
         st.stop()
+
+
