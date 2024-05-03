@@ -39,7 +39,7 @@ def generate_qr(url, error, version, mode, scale=30, border=1, light='#FFFFFF', 
     return buff, img
 
 
-def generate_qr_with_img(url, logo, version, mode, scale=30, border=1, light='#FFFFFF', dark='#000000',
+def generate_qr_with_img(url, logo, size, version, mode, scale=30, border=1, light='#FFFFFF', dark='#000000',
                          **kwargs_img) -> Image:
     qr_code = segno.make_qr(url, error='h', version=version, mode=mode)
 
@@ -49,7 +49,7 @@ def generate_qr_with_img(url, logo, version, mode, scale=30, border=1, light='#F
     img = Image.open(buff).convert("RGBA")
 
     ing_width, img_height = img.size
-    logo_max_size = img_height // 3
+    logo_max_size = img_height * size/100
 
     logo_img = Image.open(logo).convert("RGBA")
 
@@ -220,8 +220,10 @@ with (tab3):
 with (tab4):
     with st.form(key='my_form4'):
         link = st.text_input("Link")
+
         uploaded_logo = st.file_uploader("Upload Logo", accept_multiple_files=False, type=["png", "jpg", "jpeg"],
-                                         help="Upload a logo to be placed in the center of the qr code")
+                                         help="Upload a logo to be placed in the center of the qr code",
+                                         )
 
         col7, col8 = st.columns(2)
 
@@ -241,6 +243,9 @@ with (tab4):
         # error = expander.selectbox("Error", [None, "L", "M", "Q", "H", "-"], index=0)
         version = expander.selectbox("Version", [None, *range(1, 41)], index=0)
         mode = expander.selectbox("Mode", [None, "alphanumeric", "byte", "numeric", "kanji", "hanzi"], index=0)
+        expander.write("Be aware that adding a logo will negatively influence the readability of the QR Code. "
+                 "Thus the logo should not be too big. Always test it!")
+        size = expander.slider("Size in %", min_value=1, max_value=100, value=33, help="Size of the logo in % of the qr code")
 
         expander2 = st.expander("Advanced Color Options:")
         dark = fg_color
@@ -267,7 +272,7 @@ with (tab4):
             show_qr.clear()
             st.write(f"Created qr code for {link}")
             buff, img = generate_qr_with_img(link, logo=uploaded_logo, scale=scale, border=border, light=bg_color,
-                                             dark=fg_color,
+                                             dark=fg_color, size=size,
                                              version=version, mode=mode, **params_img
                                              )
             show_qr(img, buff)
