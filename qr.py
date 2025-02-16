@@ -179,7 +179,7 @@ with (tab3):
 
         expander = st.expander("Advanced Options:")
         expander.write("Don't change these unless you know what you're doing")
-        error = expander.selectbox("Error", [None, "L", "M", "Q", "H", "-"], index=0)
+        error = expander.selectbox("Error", [None, "L", "M", "Q", "H", "-"], index=2)
         version = expander.selectbox("Version", [None, *range(1, 41)], index=0)
         mode = expander.selectbox("Mode", [None, "alphanumeric", "byte", "numeric", "kanji", "hanzi"], index=0)
 
@@ -240,7 +240,7 @@ with (tab4):
 
         expander = st.expander("Advanced Options:")
         expander.write("Don't change these unless you know what you're doing")
-        # error = expander.selectbox("Error", [None, "L", "M", "Q", "H", "-"], index=0)
+        # error = expander.selectbox("Error", [None, "L", "M", "Q", "H", "-"], index=2)
         version = expander.selectbox("Version", [None, *range(1, 41)], index=0)
         mode = expander.selectbox("Mode", [None, "alphanumeric", "byte", "numeric", "kanji", "hanzi"], index=0)
         expander.write("Be aware that adding a logo will negatively influence the readability of the QR Code. "
